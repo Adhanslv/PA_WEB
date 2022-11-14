@@ -165,7 +165,7 @@ body{
 }
 .header2{
    
-   background-color: #dee7ec;
+  background-image: linear-gradient(to left,#FFF0F5,#E0FFFF);
    height: 50px;
   }
 /* tulisan header2 */
@@ -274,8 +274,11 @@ input[type=text] {
 nav{
 
   height:200px;
-  background-color:#dee3ff;
-  border-bottom: 50px solid #dee7ec;
+  /* background-color:#dee3ff;
+  border-bottom: 50px solid #dee7ec; */
+  background-image: linear-gradient(to bottom, #E0FFFF,#E6E6FA );
+  /* background-image: linear-gradient(to left,#C0C0C0,#FFF5EE); */
+  border-bottom: 50px linear-gradient(to left , #A0F1EA,#EAD6EE);
 }
 
 nav ul {
@@ -333,10 +336,12 @@ th {
   color: white;
 }
 .footer{
-  background-color:#4a4a4a;
+  /* background-color:#4a4a4a; */
   color: white;
   padding:50px 30px;
   border-top: 50px solid #dee7ec;
+  background-image: linear-gradient(to left,#778899,#4a4a4a);
+  background-image: linear-gradient(to bottom,#778899,#4a4a4a);
   
 }
 .footer-container{
@@ -428,9 +433,9 @@ th {
   }
 
   .info{
-    font-size:22px;
+    font-size:50px;
   padding-left:22px;
-  margin-top:100px;
+  margin-top:50px;
 
   }
   .masukan {  
