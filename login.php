@@ -101,8 +101,8 @@ h2{
 
 .show-hide{
     position: absolute;
-    right:460px;
-    bottom:458px;
+    right:430px;
+    bottom:366px;
     font-size:18px;
 }
 .show-hide i{
@@ -169,7 +169,7 @@ h2{
     .show-hide{
     position: absolute;
     right:60px;
-    bottom:432px;
+    bottom:297px;
     font-size:18px;
     }
 }

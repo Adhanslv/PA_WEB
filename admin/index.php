@@ -68,14 +68,6 @@
           ?>
           <p>Jumlah Data : <?php echo $jumlah ?></p>
         </article>
-        <article class="card">
-          <h2><i class="fa-solid fa-database"></i> Data Histori</h2>
-          <?php
-            $rows = $db->query('SELECT * FROM tb_histori'); 
-            $jumlah = $rows->num_rows;
-          ?>
-          <p>Jumlah Data : <?php echo $jumlah ?></p>
-        </article>
       </section>
     </div>
 

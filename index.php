@@ -68,7 +68,7 @@
      <div class="header-logo2">  Cari sesuai dengan keinginan anda </div>
        
       <form METHOD="POST" >
-        <input class="srch" type="text" name="keyword"  placeholder="Masukan Keyword .   . . . ">
+        <input class="srch" type="text" name="keyword"  placeholder="Masukan Keyword . . . .">
         <button  class="create" type="submit" name="cari"><i class="fas fa-search"></i> Cari Kata</button>
       </form>
     
