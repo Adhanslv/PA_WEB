@@ -3,7 +3,7 @@
   session_start();
   
   if (!isset($_SESSION['username'])) {
-      header("Location: LOG-IN.php");}
+      header("Location: login.php");}
 
 
   $tampil = "SELECT * FROM tb_user ";
