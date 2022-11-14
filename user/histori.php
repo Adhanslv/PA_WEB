@@ -11,16 +11,7 @@
                     tb_produk.desk,tb_produk.kategori FROM tb_pembelian
                     LEFT JOIN tb_user on tb_pembelian.id_user = tb_user.id_user
                     LEFT JOIN tb_produk on tb_pembelian.id_produk = tb_produk.id_produk
-                    WHERE tb_pembelian.id_user = '$id_user'");
-                    
-  $tampil = "SELECT * FROM tb_pembelian ";
-
-  if( isset($_POST["cari"])){
-    $nama_dicari = $_POST["keyword"];
-    $tampil = "SELECT *FROM tb_pembelian WHERE jumlah      LIKE '%$nama_dicari%' OR
-                                               tanggal     LIKE '%$nama_dicari%' OR
-                                               harga       LIKE '%$nama_dicari%' ";
-}
+                    WHERE tb_pembelian.id_user = $id_user ");
 
 ?>  
 <!DOCTYPE html>
@@ -36,15 +27,16 @@
 <html>
 <body>
 
-    <div class="links">
-        <a href="profil_user.php"><p class="balik"><i class="fa-solid fa-angle-left"></i> Kembali</p></a>
-    </div>
+
     <div class="tombol">
-      <form method="POST" >
-        <input type="text" name="keyword" style="height: 30px;" placeholder="Masukan keyword pencarian">
-        <button  class="create" type="submit" name="cari"><i class="fas fa-search"></i>Cari Kata</button>
+      <form    METHOD="POST" >
+        <input type="text" name="keyword" style="height: 30px;" placeholder="Masukan Keyword .   . . . ">
+        <button  class="create" type="submit" name="cari"><i class="fas fa-search"></i> Cari Kata</button>
       </form>
     </div>
+    <p class="info">Data Produk</p>
+    <pre><?php print_r($_SESSION['pelanggan'])?></pre>
+
     <table>
         <tr>
               <th>NoBeli</th>
@@ -72,8 +64,6 @@
         ?>	
     </table>
 
-
-
 </body>
 </html>
 
@@ -85,15 +75,7 @@ body{
     font-family: 'Poppins', sans-serif;
 
 }
-.links a{
-    text-decoration:none;
-}
 
-.balik{
-  margin-top:12px;
-  margin-left:5px;
-  font-size:22px;
-}
 
 
 input[type=text] {
@@ -151,17 +133,19 @@ button{
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-bottom:75px;
-  margin-top:78px;
-  margin-right:75px;
-  margin-left:75px;
+  margin: 35px 69px 0 75px;
   cursor: pointer;
 
 }
 
+.info{
+    color:black;
+    font-size:22px;
+    padding-left:97px;
+    margin-top:100px;
+}
 
 table {
-  overflow-x:autp;
   border-collapse: collapse;
   width: 90%;
   margin: auto;
@@ -171,7 +155,6 @@ th, td {
   text-align: left;
   padding: 8px;
   border-bottom:1px solid #cad1db;
-  
 
 }
 

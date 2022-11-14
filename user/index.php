@@ -2,9 +2,40 @@
   require '..\koneksi.php'; 
   session_start();
 
+
+
+
   $tampil  = "SELECT * FROM tb_produk ";
   $hasi    = mysqli_query($db, $tampil);
   $jumlah  = mysqli_num_rows($hasi);
+
+  if (!isset($_SESSION['username'])) {
+    header("Location: LOG-IN.php");}
+
+//   $tampil = "SELECT * FROM tb_produk ";
+//   if( isset($_POST["cari"])){
+//     $nama_dicari = $_POST["keyword"];
+//     $tampil = "SELECT *FROM tb_produk WHERE gambar      LIKE '%$nama_dicari%' OR
+//                                             nama        LIKE '%$nama_dicari%' OR
+//                                             harga       LIKE '%$nama_dicari%' OR
+//                                             stok        LIKE '%$nama_dicari%' OR
+//                                             desk        LIKE '%$nama_dicari%' OR
+//                                             kategori    LIKE '%$nama_dicari%' OR
+//                                             id_produk   LIKE  '%$nama_dicari%'";
+// }
+if( isset($_POST["cari"])){
+  $nama_dicari = $_POST["keyword"];
+  $select_sql = "SELECT tb_pembelian.id_pembelian ,tb_pembelian.tanggal, 
+                tb_produk.gambar, tb_user.username,tb_pembelian.jumlah, tb_pembelian.harga,
+                tb_produk.desk,tb_produk.kategori FROM tb_pembelian
+                INNER JOIN tb_user on tb_pembelian.id_user = tb_user.id_user
+                INNER JOIN tb_produk on tb_pembelian.id_produk = tb_produk.id_produk
+                WHERE (id_pembelian       LIKE '%$nama_dicari%' OR
+                      jumlah       LIKE '%$nama_dicari%' OR
+                      tanggal       LIKE '%$nama_dicari%' OR
+                      harga         LIKE '%$nama_dicari%' OR
+                      desk          LIKE '%$nama_dicari%' OR 
+                      kategori      LIKE '%$nama_dicari%')";}
   
 ?>  
 <!DOCTYPE html>
@@ -20,6 +51,7 @@
 </head>
 <html>
 <body>
+  <section id="home">
   <nav>
     <ul>
     <?php if(isset($_SESSION['username'])){
@@ -29,11 +61,23 @@
     ?>
     
     </a></li> 
+   
     <li><a href="keranjang.php"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a></li>
-    <img class ="logo" src="..\img/cel.png" alt="gambarnya logonya" width="200px">
-
-    </ul> 
+    <li><a href="#about">About</a></li>
+    <li><a href="#home">Home</a></li>
+    <img src="https://serbasepeda.com/assets/frontend/images/logo-serbasepeda.svg" alt="SerbaSepeda Logo" class="image">
+    
+  </ul> 
   </nav>
+  <div class ="header2">
+     <div class="header-logo2">  Cari sesuai dengan keinginan anda </div>
+       
+      <form METHOD="POST" >
+        <input class="srch" type="text" name="keyword"  placeholder="Masukan Keyword .   . . . ">
+        <button  class="create" type="submit" name="cari"><i class="fas fa-search"></i> Cari Kata</button>
+      </form>
+    
+    </div>
     <div class="gari">
       <p class="info">Produk</p>
     </div>
@@ -56,17 +100,51 @@
     }
     ?>
     </div>
-<div class="footer">
-  <div class="footer-list">
-      <ul>
-          <li><a href="https://wa.me/6281254424739"><i class="fa1 fas fa-phone"></i> Contact</a></li>
-          <li><a href="https://twitter.com/Cnoxerr12345"><i class="fa1 fa-brands fa-twitter"></i> Twiter</a></li>
-          <li><a href="https://www.instagram.com/ash4rr/"><i class="fa1 fa-brands fa-instagram"></i> Instagram</a></li>
-          <img class ="logo2" src="..\img/vel.png" alt="gambarnya logonya"   width="200px">
-      </ul>
-  </div>
-</div>
 
+    <footer class=" footer">
+      <section id="about">
+      <div class ="footer-container">
+      <div class="row">
+      <img src="https://serbasepeda.com/assets/frontend/images/logo-serbasepeda.svg" alt="SerbaSepeda Logo" class="image">
+        <div class ="footer-nav-section" >
+          <h4 class ="heading">Serba Sepeda</h4>
+          <ul class="items">
+            <li class="item"><a href="#">Tentang Kami</a></li> 
+            <li class="item"><a href="#"> Blog serba sepeda</a></li> 
+            <li class="item"><a href="#"> daftar brand </a></li> 
+            <li class="item"><a href="#">promosi </a></li> 
+            <li class="item"><a href="#">garansi seumur hidup</a></li> 
+            <li class="item"><a href="#">reward point & referal </a></li>
+            <li class="item"> <a href="#">service sepeda </a></li> 
+            <li class="item"><a href="#">lowongan kerja </a></li> 
+          </ul>
+      </div>
+        <div class=" footer-nav-section">
+          <h4 class ="heading"> Get Help</h4>
+          <ul class =" items">  
+            <li class="item" > <a href="#">FAQ(Frequently Asked Question</a></li> 
+            <li class="item"><a href="#">syarat dan ketentuan</a></li> 
+            <li class="item"> <a href="#">konfirmasi pembayaran</a></li> 
+            <li class="item"> <a href="#">cara berbelanja</a></li> 
+            <li class="item"> <a href="#">syarat dan cara kredit sepeda</a></li> 
+            <li class="item"><a href="#">hubungi kami</a></li> 
+          </ul>
+        </div>
+        <div class="footer-nav-section">
+          <div class="media">
+          <h4 class ="heading">Follow Us</h4>
+            <ul class="media-items">
+              <li><a href="https://wa.me/6281254424739"><i class="fa1 fas fa-phone"></i> Contact</a></li>
+              <li><a href="https://twitter.com/Cnoxerr12345"><i class="fa1 fa-brands fa-twitter"></i> Twiter</a></li>
+              <li><a href="https://www.instagram.com/ash4rr/"><i class="fa1 fa-brands fa-instagram"></i> Instagram</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  </footer>
+  </section>
 </body>
 </html>
 
@@ -85,10 +163,56 @@ body{
     margin-top: -30px;
     margin-left:12px;
 }
+.header2{
+   
+   background-color: #dee7ec;
+   height: 50px;
+  }
+/* tulisan header2 */
+.header-logo2{
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    float: left;
+    height : 30px;
+    padding: 10px 30px;
+    color:black;
+    color:#505091;
+  font-family: 'Cormorant', serif;
+}
 
-.logo2{
-    margin-top: 25px;
-    margin-left:12px;
+   /* form searching */
+.srch{ 
+  
+   border: 1px;
+   display: inline-block;
+   width: 50%; 
+   height:30%; 
+   margin-top: 30px;color:white; 
+  color: black;
+  text-align: center;
+  padding :10px;
+  display: inline-block;
+  font-size: 16px;
+  border-radius:10px;
+
+}
+.create{
+  margin-left:80px;
+  color:white;
+  background-color: #4CAF50; 
+  border: 4px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding :5%;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius:10px;
+}
+.placholder{
+   border: 1px solid rgb(8, 208, 172);
+
 }
 .container-card{
   display: flex;
@@ -115,7 +239,10 @@ body{
   cursor: pointer;
   width: 50%;
   margin-left: 65px;
+  margin-bottom:10px;
+  border-radius: 5px;
   font-size: 18px;
+
 }
 
 .cekout {  
@@ -129,8 +256,9 @@ body{
   width: 40%;
   height:45px;
   margin-left: -0px;
-  margin-bottom:-0px;
   font-size: 18px;
+  margin-bottom:10px;
+  border-radius: 5px;
 }
 
 input[type=text] {
@@ -139,22 +267,37 @@ input[type=text] {
   margin-top: 8px;
   font-size: 15px;
   font-family: 'Poppins', sans-serif;
+
+
+  
+}
+nav{
+
+  height:200px;
+  background-color:#dee3ff;
+  border-bottom: 50px solid #dee7ec;
 }
 
-ul {
+nav ul {
   list-style-type: none;
   margin: 0;
-  padding: 0;
   font-size:20px;
   overflow: hidden;
+  height: 150px;
+  font-family: 'Nunito', sans-serif;
+  padding : 33px 20px;
+  padding-left:10px;
 }
+ul li a:hover{
+    color: #145ba3;
+    padding-left:10px;
+  }
 
-li {
+nav ul li {
   float: right;
 }
 
-li a {
-  font: size 27px;
+nav ul li a {
   display: block;
   color:black;
   text-align: center;
@@ -162,39 +305,16 @@ li a {
   text-decoration: none;
 }
 
-
-.tombol{
-  float:right;
-}
-button{
-  text-decoration: none;
-  display: inline-block;
-  margin: 35px 69px;
-    
-
-}
-
-
 .info{
-  color:black;
+  color:#505091;
   font-size:22px;
   padding-left:22px;
-  margin-top:100px;
+  margin-top:50px;
+  font-family: 'Cormorant', serif;
+  font-size:50px;
+  border-bottom: 2px solid #dee7ec;
 }
 
-.footer ul {
-  background-color: rgb(46, 44, 44);
-  color: white;
-  margin-top: 120px;
-  height: 95px;
-  padding: 12px;
-}
-.footer-list li a {
-  margin-top:7px;
-  color:white;
-  cursor: pointer;
-  float: right;
-}
 
 table {
   border-collapse: collapse;
@@ -212,6 +332,52 @@ th {
   background-color: #242020;
   color: white;
 }
+.footer{
+  background-color:#4a4a4a;
+  color: white;
+  padding:50px 30px;
+  border-top: 50px solid #dee7ec;
+  
+}
+.footer-container{
+  max-width:1170px;
+  margin:auto;
+
+}
+.row{
+  display: flex;
+  flex:wrap;
+}
+.footer ul{
+  list-style:none;
+}
+.footer-nav-section{
+  width: 25%;
+  padding: 0 25px;
+}
+.footer-nav-section h4{
+  font-size: 18px;
+  text-transform: capitalize;
+  margin-bottom:15px;
+  font-family: 'Poppins', sans-serif;
+  font-style: bold;
+}
+.footer-nav-section ul li:not(:last-child){
+  margin-bottom:10px;
+}
+.footer-nav-section ul li a{
+  font-size:16px;
+  text-decoration:none;
+  color: #ffffff;
+  font-weight:300;
+  color:#bbbb;
+  display:block;
+}
+.footer-nav-section ul li a:hover{
+  color: #ffffff;
+  padding-left:10px;
+}
+/* responsive */
 @media (max-width: 638px) {
   .masukan {  
   border: none;
@@ -260,10 +426,12 @@ th {
     margin-top: -99px;
     margin-left:-22px;
   }
+
   .info{
     font-size:22px;
   padding-left:22px;
   margin-top:100px;
+
   }
   .masukan {  
   border: none;
@@ -291,24 +459,117 @@ th {
   }   
 }
 
-@media (min-width: 377px) {
-.footer-list li a {
-  flex-wrap: wrap;
-  color:white;
-  font-size:15px;
-  cursor: pointer;
-  float: right;
-}
-}
-@media (min-width: 1187px) {
-.footer-list li a {
-  flex-wrap: wrap;
-  color:white;
-  font-size:19px;
-  cursor: pointer;
-  float: right;
-}
-}
+@media(max-width:767px){
+  .footer-nav-section {
+  width: 50%;
+  margin-bottom:30px;
 
+  }
+}
+@media(max-width:574px){
+  .footer-nav-section {
+  width: 100%;
+  margin-bottom:30px;
 
+  }
+}
+@media (max-width: 638px) {
+  .srch{
+    margin-left: -15px;
+  }
+  .create{
+    /* margin-left: -15px; */
+    font-size:16px;;
+    padding: 5px;
+  }
+
+  .header-logo2{
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    float: left;
+    height : 30px;
+    color:black;
+    color:#505091;
+  font-family: 'Cormorant', serif;
+  }
+}
+@media (max-width: 757px) {
+  .srch{
+    margin-left: -15px;
+  }
+  .create{
+    /* margin-left: -15px; */
+    padding: 5px;
+    font-size:16px;;
+  }
+  .header-logo2{
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    float: left;
+    height : 30px;
+    padding: 10px 30px;
+    color:black;
+    color:#505091;
+  font-family: 'Cormorant', serif;
+  }
+}
+@media (max-width: 1021px) {
+  .srch{
+    margin-left: -15px;
+  }
+  .create{
+    /* margin-left: -15px; */
+    font-size:16px;;
+    padding: 5px;
+  }
+
+  .header-logo2{
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    float: left;
+    height : 30px;
+    color:black;
+    color:#505091;
+  font-family: 'Cormorant', serif;
+  }}
+@media (min-width: 1194px) {
+  .srch{
+    margin-left: -15px;
+  }
+  .create{
+    /* margin-left: -15px; */
+    padding: 5px;
+    font-size:16px;;
+  }
+  .header-logo2{
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    float: left;
+    height : 30px;
+    color:black;
+    color:#505091;
+  font-family: 'Cormorant', serif;
+  }
+}
+@media (min-width: 377px) {  
+  .srch{
+    margin-left: -15px;
+  }
+  .create{
+    /* margin-left: -15px; */
+    padding: 5px;
+    font-size:16px;;
+  }
+  .header-logo2{
+  padding-left:22px;
+  font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    float: left;
+    height : 30px;
+    color:black;
+    color:#505091;
+  font-family: 'Cormorant', serif;
+  }}
 </style>
+
+
