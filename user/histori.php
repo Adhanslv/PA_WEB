@@ -6,12 +6,12 @@
 
   $id_user = $_SESSION['pelanggan']['id_user'];
   
-  $data = $db->query("SELECT tb_pembelian.id_pembelian ,tb_pembelian.tanggal, 
-                    tb_produk.gambar, tb_user.username,tb_pembelian.jumlah, tb_pembelian.harga,
-                    tb_produk.desk,tb_produk.kategori FROM tb_pembelian
-                    LEFT JOIN tb_user on tb_pembelian.id_user = tb_user.id_user
-                    LEFT JOIN tb_produk on tb_pembelian.id_produk = tb_produk.id_produk
-                    WHERE tb_pembelian.id_user = $id_user ");
+  $data = $db->query("SELECT pembelian.id_pembelian ,pembelian.tanggal, 
+                    produk.gambar, user.username,pembelian.jumlah, pembelian.harga,
+                    produk.deskripsi,produk.kategori FROM pembelian
+                    LEFT JOIN user on pembelian.id_user = user.id_user
+                    LEFT JOIN produk on pembelian.id_produk = produk.id_produk
+                    WHERE pembelian.id_user = '$id_user ' ");
 
 ?>  
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
       </form>
     </div>
     <p class="info">Data Produk</p>
-    <pre><?php print_r($_SESSION['pelanggan'])?></pre>
+    <!-- <pre><?php print_r($_SESSION['pelanggan'])?></pre> -->
 
     <table>
         <tr>
@@ -45,7 +45,7 @@
               <th>Jumlah</th>
               <th>Harga</th>  
               <th>Tanggal</th>
-              <th>Desk</th>  
+              <th>Deskripsi</th>  
               <th>Kategori</th>
         </tr>
         <?php foreach ($data as $hasil) { ?>
@@ -56,7 +56,7 @@
             <td><?php echo $hasil ['jumlah']?></td>
             <td>Rp.<?php echo number_format ($hasil ['harga'])?></td>
             <td><?php echo $hasil ['tanggal']?></td>
-            <td><?php echo $hasil ['desk']?></td>
+            <td><?php echo $hasil ['deskripsi']?></td>
             <td><?php echo $hasil ['kategori']?></td>
         </tr>
         <?php

@@ -9,11 +9,11 @@
 
   if( isset($_POST["cari"])){
     $nama_dicari = $_POST["keyword"];
-    $tampil = "SELECT *FROM tb_produk WHERE gambar      LIKE '%$nama_dicari%' OR
+    $tampil = "SELECT *FROM produk WHERE gambar      LIKE '%$nama_dicari%' OR
                                             nama        LIKE '%$nama_dicari%' OR
                                             harga       LIKE '%$nama_dicari%' OR
                                             stok        LIKE '%$nama_dicari%' OR
-                                            desk        LIKE '%$nama_dicari%' OR
+                                            deskripsi   LIKE '%$nama_dicari%' OR
                                             kategori    LIKE '%$nama_dicari%' OR
                                             id_produk   LIKE  '%$nama_dicari%'";
 }
@@ -55,15 +55,15 @@
             <th>Username</th>
             <th>Jumlah</th>
             <th>Harga</th>  
-            <th>Desk</th>  
+            <th>Deskripsi</th>  
             <th>Kategori</th>
         </tr>
         <?php
-        $data = $db->query("SELECT tb_produk.gambar, tb_user.username,
-                        tb_pembelian.jumlah, tb_pembelian.harga, tb_produk.desk,
-                        tb_produk.kategori FROM tb_pembelian
-                        LEFT JOIN tb_user on tb_pembelian.id_user = tb_user.id_user
-                        LEFT JOIN tb_produk on tb_pembelian.id_produk = tb_produk.id_produk
+        $data = $db->query("SELECT produk.gambar, user.username,
+                        pembelian.jumlah, pembelian.harga, produk.deskripsi,
+                        produk.kategori FROM pembelian
+                        LEFT JOIN user on pembelian.id_user = user.id_user
+                        LEFT JOIN produk on pembelian.id_produk = produk.id_produk
                         ");
         while($hasil = $data->fetch_array()){
         ?>
@@ -72,7 +72,7 @@
             <td><?php echo $hasil ['username']?></td>
             <td><?php echo $hasil ['jumlah']?></td>
             <td>Rp.<?php echo number_format ($hasil ['harga'])?></td>
-            <td><?php echo $hasil ['desk']?></td>
+            <td><?php echo $hasil ['deskripsi']?></td>
             <td><?php echo $hasil ['kategori']?></td>
 
 

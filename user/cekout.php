@@ -27,7 +27,7 @@ require '..\koneksi.php';
         <tr>
             <th>Gambar Produk</th>
             <th>Harga</th>
-            <th>Desk</th>
+            <th>Deskripsi</th>
             <th>Kategori</th>
             <th>Jumlah</th>
             <th>Sub Harga</th>
@@ -36,7 +36,7 @@ require '..\koneksi.php';
         <?php foreach($_SESSION['keranjang'] as $id_produk => $jumlah){?>
             <!-- Menampilkan Data Produk -->
             <?php
-            $tampil = $db->query("SELECT * FROM tb_produk
+            $tampil = $db->query("SELECT * FROM produk
                                 WHERE id_produk ='$id_produk'");
             $data =   $tampil->fetch_assoc();
             $subharga = $data['harga'] * $jumlah;
@@ -44,7 +44,7 @@ require '..\koneksi.php';
             <tr>
                 <td><img src="../img/<?=$data['gambar']?>" alt="" width="160px"></td>
                 <td>Rp.<?php echo number_format ($data ['harga'])?></td>
-                <td><?php echo $data ['desk']?></td>
+                <td><?php echo $data ['deskripsi']?></td>
                 <td><?php echo $data ['kategori']?></td>
                 <td><?php echo $jumlah?></td>
                 <td>Rp.<?php echo number_format ($subharga)?></td>
@@ -74,7 +74,7 @@ require '..\koneksi.php';
         <select name="id_ongkir">
             <option disabled selected>Ongkir </option>
             <?php 
-            $tampil = $db->query("SELECT * FROM tb_ongkir");
+            $tampil = $db->query("SELECT * FROM ongkir");
             while($ongkir = $tampil->fetch_assoc()){
                 ?>
             <option value="<?php echo $ongkir['id_ongkir']?>">
@@ -93,18 +93,18 @@ require '..\koneksi.php';
         $id_ongkir = $_POST['id_ongkir'];
         $tanggal   = date("Y-m-d");
 
-        $tampil = $db->query("SELECT * FROM tb_produk
+        $tampil = $db->query("SELECT * FROM produk
                          WHERE id_produk ='$id_produk'");
         $data =   $tampil->fetch_assoc();
 
-        $tampil = $db->query("SELECT * FROM tb_ongkir WHERE
+        $tampil = $db->query("SELECT * FROM ongkir WHERE
                     id_ongkir = '$id_ongkir'");
 
         $result     = $tampil->fetch_assoc();
         $tarif      = $result['tarif'];
         $total_beli =  $total+$tarif;
 
-        $db->query("INSERT INTO tb_pembelian(
+        $db->query("INSERT INTO pembelian(
                     id_user,id_produk,id_ongkir,jumlah,tanggal,harga)
                     VALUES('$id_user','$id_produk', '$id_ongkir','$jumlah_total','$tanggal','$total_beli')");
 

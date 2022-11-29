@@ -6,16 +6,16 @@
       header("Location: login.php");}
 
 
-  $tampil = "SELECT * FROM tb_produk ";
+  $tampil = "SELECT * FROM produk ";
 
 
   if( isset($_POST["cari"])){
     $nama_dicari = $_POST["keyword"];
-    $tampil = "SELECT *FROM tb_produk WHERE gambar      LIKE '%$nama_dicari%' OR
+    $tampil = "SELECT *FROM produk WHERE gambar      LIKE '%$nama_dicari%' OR
                                             nama        LIKE '%$nama_dicari%' OR
                                             harga       LIKE '%$nama_dicari%' OR
                                             stok        LIKE '%$nama_dicari%' OR
-                                            desk        LIKE '%$nama_dicari%' OR
+                                            deskripsi        LIKE '%$nama_dicari%' OR
                                             kategori    LIKE '%$nama_dicari%' OR
                                             id_produk   LIKE  '%$nama_dicari%'";
 }
@@ -58,7 +58,7 @@
             <th>Nama Barang</th>
             <th>Harga</th>
             <th>Stok</th>
-            <th>Desk</th>
+            <th>Deskripsi</th>
             <th>Kategori</th>
             <th>Action</th>
         </tr>
@@ -75,7 +75,7 @@
             <td><?php echo $data ['nama']?></td>
             <td>Rp.<?php echo number_format ($data ['harga'])?></td>
             <td><?php echo $data ['stok']?></td>
-            <td><?php echo $data ['desk']?></td>
+            <td><?php echo $data ['deskripsi']?></td>
             <td><?php echo $data ['kategori']?></td>
             <td colspan='2'>
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

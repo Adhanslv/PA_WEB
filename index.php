@@ -2,19 +2,19 @@
   require 'koneksi.php'; 
   session_start();
 
-  $tampil  = "SELECT * FROM tb_produk ";
+  $tampil  = "SELECT * FROM produk ";
   $hasi    = mysqli_query($db, $tampil);
   $jumlah  = mysqli_num_rows($hasi);
  
 
-  $tampil  = "SELECT * FROM tb_produk ";
+  $tampil  = "SELECT * FROM produk ";
   if( isset($_POST["cari"])){
     $nama_dicari = $_POST["keyword"];
-    $tampil = "SELECT *FROM tb_produk WHERE gambar      LIKE '%$nama_dicari%' OR
+    $tampil = "SELECT *FROM produk WHERE gambar         LIKE '%$nama_dicari%' OR
                                             nama        LIKE '%$nama_dicari%' OR
                                             harga       LIKE '%$nama_dicari%' OR
                                             stok        LIKE '%$nama_dicari%' OR
-                                            desk        LIKE '%$nama_dicari%' OR
+                                            deskripsi   LIKE '%$nama_dicari%' OR
                                             kategori    LIKE '%$nama_dicari%' OR
                                             id_produk   LIKE  '%$nama_dicari%'";
 }
@@ -42,11 +42,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/6acc3fbd7c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
     <title>Produk</title>
     <link rel="icon" href="https://www.freepnglogos.com/uploads/honda-logo-png/honda-motorcycles-logo-wing-10.png">
 </head>
 <html>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <section id="home">
   <nav>
     <ul>
@@ -61,7 +63,8 @@
     <li><a href="login.php">Keranjang</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#home">Home</a></li>
-    <img src="https://serbasepeda.com/assets/frontend/images/logo-serbasepeda.svg" alt="SerbaSepeda Logo" class="image">
+    <!-- <img src="https://serbasepeda.com/assets/frontend/images/logo-serbasepeda.svg" alt="SerbaSepeda Logo" class="image"> -->
+    <img src="img/logoo.png" alt="kueLogo" class="logo" width ="150px"> 
     </ul> 
   </nav>
   <div class ="header2">
@@ -75,24 +78,59 @@
       </div>
     <p class="info">Produk</p>
 
+   
+
+    <?php 
+      $halperpage = 5;
+      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+      $sebelum = $page-1;
+      $setelah = $page+1;
+      $mulai = ($page>1) ? ($page * $halperpage) - $halperpage : 0;
+      $tampil  = "SELECT * FROM produk ";
+      $hasi    = mysqli_query($db, $tampil);
+      $jumlah  = mysqli_num_rows($hasi);
+      $pages = ceil($jumlah/$halperpage);            
+      $hasi = mysqli_query($db,"SELECT * FROM produk LIMIT $mulai, $halperpage");
+      $no = $mulai+1;
+    ?>
+ 
     <div class="container-card">
-    <?php
+      <?php
       if($jumlah > 0){
         while($row = mysqli_fetch_assoc($hasi)){
-    ?>
-      <div class="card">
-            <img src="img/<?=$row['gambar']?>" alt="gambar_produk" width="200px">
-            <h1><?= $row['kategori'] ?></h1>
+      ?>
+         <div class="card">
+            <img src="img/<?=$row['gambar']?>" alt="gambar_produk" width="200px" class="gbrkue">
+            <h5><?= $row['kategori'] ?></h5>
             <p class="price">Rp.<?= $row['harga']?></p>
-            <p><?= $row['desk']?></p>
+            <p><?= $row['nama']?></p>
             <a href="login.php"class="masukan"><i class="fa-solid fa-cart-plus"></i></a>
             <a href="login.php"><button class="cekout">Beli</button></a>
         </div>
-    <?php
-        }
-    }
-    ?>
+      <?php
+          }
+      }
+      ?>
+
     </div>
+    <div class="next">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" <?php if($page > 1){ echo "href='?page=$sebelum'"; } ?>>Previous</a>
+        </li>
+        <?php 
+          for($i=1; $i<=$pages; $i++){
+        ?> 
+        <li class="page-item"><a class="page-link" href="?page=<?php echo $i ?>"> <?php echo $i; ?></a></li>
+        <?php
+          }
+        ?> 
+        <li class="page-item">
+          <a  class="page-link" <?php  if($page < $pages) { echo "href='?page=$setelah'"; } ?>>Next</a>
+        </li>
+      </ul>
+    </div>
+
 <footer class=" footer">
 <section id="about">
       <div class ="footer-container">
@@ -154,9 +192,10 @@ body{
     font-family: 'Poppins', sans-serif;
 
 }
+
 .logo{
-    margin-top: -30px;
-    margin-left:12px;
+    margin-top: 15px;
+    margin-left:5px;
 }
 nav{
   height:200px;
@@ -265,6 +304,11 @@ nav ul li a {
   text-align: center;
  
 }
+.gbrkue{
+  margin-left:70px;
+  margin-top:15px;
+  margin-bottom:5px;
+}
 .price {
   color: grey;
   font-size: 22px;
@@ -273,15 +317,15 @@ nav ul li a {
   border: none;
   outline: 0;
   padding: 10px;
+  margin-top: 3px;
   color: white;
   background-color: #145ba3;
   cursor: pointer;
-  width: 50%;
-  margin-left: 65px;
-  margin: bottom 55px;
+  width: 20%;
+  margin-left: 20px;
+  margin-top:10px;
+  border-radius: 5px;
   font-size: 18px;
-   border-radius: 5px;
-   margin-bottom:10px;
 }
 
 .cekout {  
@@ -289,14 +333,14 @@ nav ul li a {
   outline: 0;
   padding: 10px;
   color: white;
-  background-color: #2f302f;
+  background-color: #fb8c00;
   text-align: center;
   cursor: pointer;
-  width: 40%;
+  width: 20%;
   height:45px;
-  margin-left: -0px;
+  margin-left: 30px;
+  margin-bottom:15px;
   font-size: 18px;
-  margin-bottom:10px;
   border-radius: 5px;
 }
 

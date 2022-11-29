@@ -1,9 +1,8 @@
-
 <?php
-    include "connfig.php";
+    include "config.php";
     if(isset($_GET['id_produk'])) {
         // Mengambil data untuk di ubah berdasarkan id;
-		$query=$dbh->query(" SELECT * FROM tb_produk WHERE id_produk='$_GET[id_produk]'");
+		$query=$dbh->query(" SELECT * FROM produk WHERE id_produk='$_GET[id_produk]'");
 		$data=$query->fetch(PDO::FETCH_ASSOC);
 	}
 ?>  
@@ -21,7 +20,7 @@
 </head>
 <body>
     <div class="form">  
-    <p class="asa" >Wind Store</p>
+    <p class="asa" >Dessert Store</p>
     <form  method="POST">
         <table border = "0">
             <tr>
@@ -45,7 +44,7 @@
             <tr>
                 <td>Deskripsi</td>
                 <td>
-                    <input type="text" name="desk" value="<?php echo $data['desk']?>" required>
+                    <input type="text" name="deskripsi" value="<?php echo $data['deskripsi']?>" required>
                 </td>
             </tr>
             <tr>
@@ -53,11 +52,9 @@
                 <td>
                 <select class="choose" name="kategori" required>
                     <option value="<?php echo $data['kategori']?>"><?php echo $data['kategori']?></option>	
-                    <option disabled selected>Kategori Sepeda</option>
-                    <option value="Wimcycle">Wimcycle</option>
-                    <option value="Bmx">Bmx</option>
-                    <option value="Fixied-Gear">Fixied-Gear</option>
-                    <option value="Cervelo">Cervelo</option>
+                    <option disabled selected>Kategori</option>
+                    <option value="Makanan-Tradisional">Makanan Tradisional</option>
+                    <option value="Minuman-Tradisional">Minuman Tradisional</option>
                 </select>
                 </td>
             </tr>
@@ -82,21 +79,21 @@
         $nama               = $_POST['nama'];
         $harga              = $_POST['harga'];
         $stok               = $_POST['stok'];
-        $desk               = $_POST['desk'];
+        $deskripsi          = $_POST['deskripsi'];
         $kategori           = $_POST['kategori'];
         $gambar             = $_POST['gambar'];
 
         // Mengupdate data dari table berdasrkan fieldnya;
-		$myqry="UPDATE tb_produk SET nama = '$nama',
+		$myqry="UPDATE produk SET nama = '$nama',
 		 							 harga = '$harga',
 		 							 stok = '$stok',
-		 							 desk = '$desk',
+		 							 deskripsi = '$deskripsi',
 		 							 kategori = '$kategori',
 		 							 gambar = '$gambar'
 		 							 WHERE id_produk='$id_produk'";
 
 		$dbh->exec($myqry);
-			echo "<span class=berhasil>Data Barang Berhasil Di Ubah,<a href=info_produk.php>Lihat Data</a></span>";
+			echo "<span class=berhasil>Data Barang Berhasil Di Ubah,<a href=data_produk.php>Lihat Data</a></span>";
 	}
 ?>
 </body>

@@ -3,7 +3,7 @@
 include "..\koneksi.php";
 	if (isset($_GET['id_user'])) {
 		// Mengahapus data berdasarkan id;
-		$hapus = "DELETE FROM tb_user WHERE id_user='$_GET[id_user]'";
+		$hapus = "DELETE FROM user WHERE id_user='$_GET[id_user]'";
 		$db->query($hapus);
 	}
 ?>

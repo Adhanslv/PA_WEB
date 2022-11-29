@@ -3,7 +3,7 @@
 include "..\koneksi.php";
 	if (isset($_GET['id_produk'])) {
 		// Mengahapus data berdasarkan id;
-		$hapus = "DELETE FROM tb_produk WHERE id_produk='$_GET[id_produk]'";
+		$hapus = "DELETE FROM produk WHERE id_produk='$_GET[id_produk]'";
 		$db->query($hapus);
 	}
 ?>

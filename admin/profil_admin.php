@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 
 $US = $_SESSION['id_user'];
 
-$select_sql = "SELECT * FROM tb_user WHERE id_user = $US";
+$select_sql = "SELECT * FROM user WHERE id_user = $US";
 $tampil = @$db->query($select_sql);
 $result = mysqli_query($db, $select_sql);
 

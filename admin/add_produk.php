@@ -4,7 +4,7 @@ require '..\koneksi.php';
 	
     // Mengambail nilai maximum dari id as = ALiAS maxKode;
     // Membuat id automatis;
-	$tampil = "SELECT max(id_produk) as maxKode FROM tb_produk";
+	$tampil = "SELECT max(id_produk) as maxKode FROM produk";
 	$query = $db->query($tampil);
 
 
@@ -14,7 +14,7 @@ require '..\koneksi.php';
         $nama        = $_POST['nama'];
         $harga       = $_POST['harga'];
         $stok        = $_POST['stok'];
-        $desk        = $_POST['desk'];
+        $deskripsi   = $_POST['deskripsi'];
         $kategori    = $_POST['kategori'];
         // $gambar             = $_POST['gambar'];
         
@@ -26,9 +26,9 @@ require '..\koneksi.php';
         $tmp = $_FILES['foto']['tmp_name'];
 
         if(move_uploaded_file($tmp, '..\img/'.$gambar_baru)){
-            $query = "INSERT INTO tb_produk (id_produk, gambar, nama, harga, stok, desk, kategori)
+            $query = "INSERT INTO produk (id_produk, gambar, nama, harga, stok, deskripsi, kategori)
                                   VALUES ('','$gambar_baru','$nama', '$harga', '$stok',
-                                          '$desk','$kategori')";
+                                          '$deskripsi','$kategori')";
             $result = $db->query($query);
 
             if($result){
@@ -57,13 +57,13 @@ require '..\koneksi.php';
 </head>
 <body>
     <div class="form">  
-    <p class="asa" ><i class="fa-solid fa-person-biking"></i> Wind Store</p>
+    <p class="asa" >Dessert Store</p>
     <form  method="POST" enctype="multipart/form-data" autocomplete="off">
         <table border = "0">
             <tr>
-                <td>Nama Barang</td>
+                <td>Nama Makanan</td>
                 <td>    
-                    <input type="text" value="Sepeda" name="nama" placeholder="Nama Barang" readonly>
+                    <input type="text" name="nama" placeholder="Nama Barang" required>
                 </td>
             </tr>
             <tr>    
@@ -81,18 +81,16 @@ require '..\koneksi.php';
             <tr>
                 <td>Desk</td>
                 <td>
-                <input type="text" name="desk" placeholder="Deskripsi" required>
+                <input type="text" name="deskripsi" placeholder="Deskripsi" required>
             </td>
             </tr>
             <tr>
                 <td>Kategori</td>
                 <td>
                 <select class="choose" name="kategori" >
-                    <option disabled selected>Kategori Sepeda</option>
-                    <option value="Wimcycle">Wimcycle</option>
-                    <option value="Bmx">Bmx</option>
-                    <option value="Fixied-Gear">Fixied-Gear</option>
-                    <option value="Cervelo">Cervelo</option>
+                    <option disabled selected>Kategori</option>
+                    <option value="Kue-Tradisional">Kue Tradisional</option>
+                    <option value="Minuman_Tradisional">Minuman Tradisional</option>
                 </select>
                 </td>
             </tr>

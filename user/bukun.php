@@ -3,7 +3,7 @@ require '..\koneksi.php';
 session_start();
 
 $ID = $_SESSION["id_user"];
-$select_sql = "SELECT * FROM tb_user WHERE id_user =$ID";
+$select_sql = "SELECT * FROM user WHERE id_user =$ID";
 $tampil = $db->query($select_sql);
 
 
@@ -22,7 +22,7 @@ if (isset($_POST["kirim"])) {
     $email      = htmlspecialchars($_POST['email']);
 
 
-    $update_sql = "UPDATE tb_user SET
+    $update_sql = "UPDATE user SET
                    username='$username',
                    email='$email'
                    WHERE id_user =$ID";

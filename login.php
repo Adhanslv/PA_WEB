@@ -48,7 +48,7 @@ if (isset($_SESSION['login'])) {
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
-    $sql = "SELECT * FROM tb_user WHERE username='$username' AND psw='$password'";
+    $sql = "SELECT * FROM user WHERE username='$username' AND psw='$password'";
     $result = mysqli_query($db, $sql);
     if ($result->num_rows > 0) {    
         $row = mysqli_fetch_assoc($result);

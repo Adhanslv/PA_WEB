@@ -15,7 +15,7 @@ date_default_timezone_set('asia/makassar');
 <body>
     <div class="container-regis" >
         <div class="judul">
-            <h2><i class="fa-solid fa-registered regis"></i>egistrasi</h2>
+            <h2><i class="fa-solid fa-registered regis"></i>Registrasi</h2>
         </div>
         <div class="form" >
 
@@ -68,7 +68,7 @@ date_default_timezone_set('asia/makassar');
 
 
 
-        $user       = $db->query("SELECT * FROM tb_user where username='$username'");
+        $user       = $db->query("SELECT * FROM user where username='$username'");
         $num_user   = mysqli_num_rows($user);
 
         if($num_user > 0){  
@@ -81,7 +81,7 @@ date_default_timezone_set('asia/makassar');
                 // $password = password_hash($password, PASSWORD_DEFAULT);
                 $password  = md5($password);
 
-                $query  = "INSERT INTO tb_user(id_user, username, psw, email, tgl)
+                $query  = "INSERT INTO user(id_user, username, psw, email, tgl)
                             VALUES('', '$username', '$password', '$email','$tanggal' )";
                 $result = $db->query($query);
 

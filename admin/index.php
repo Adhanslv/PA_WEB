@@ -8,12 +8,12 @@
   }
 
 
-  $tampil = "SELECT * FROM tb_user ";
+  $tampil = "SELECT * FROM user ";
 
 
   if( isset($_POST["cari"])){
     $nama_dicari = $_POST["keyword"];
-    $tampil = "SELECT *FROM tb_user WHERE username  LIKE '%$nama_dicari%' OR
+    $tampil = "SELECT *FROM user WHERE username     LIKE '%$nama_dicari%' OR
                                           email     LIKE '%$nama_dicari%'";
 }
 
@@ -47,7 +47,7 @@
         <article class="card">
           <h2><i class="fa-solid fa-database"></i> Data User</h2>
           <?php
-            $rows = $db->query('SELECT * FROM tb_user'); 
+            $rows = $db->query('SELECT * FROM user'); 
             $jumlah = $rows->num_rows;
           ?>
           <p>Jumlah Data : <?php echo $jumlah ?></p>
@@ -55,7 +55,7 @@
         <article class="card">
           <h2><i class="fa-solid fa-database"></i> Data Produk</h2>
           <?php
-            $rows = $db->query('SELECT * FROM tb_produk'); 
+            $rows = $db->query('SELECT * FROM produk'); 
             $jumlah = $rows->num_rows;
           ?>
           <p>Jumlah Data : <?php echo $jumlah ?></p>
@@ -63,7 +63,7 @@
         <article class="card">
           <h2><i class="fa-solid fa-database"></i> Data Pembelian</h2>
           <?php
-            $rows = $db->query('SELECT * FROM tb_pembelian'); 
+            $rows = $db->query('SELECT * FROM pembelian'); 
             $jumlah = $rows->num_rows;
           ?>
           <p>Jumlah Data : <?php echo $jumlah ?></p>

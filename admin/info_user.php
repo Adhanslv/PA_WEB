@@ -6,12 +6,12 @@
       header("Location: login.php");}
 
 
-  $tampil = "SELECT * FROM tb_user ";
+  $tampil = "SELECT * FROM user ";
 
 
   if( isset($_POST["cari"])){
     $nama_dicari = $_POST["keyword"];
-    $tampil = "SELECT *FROM tb_user WHERE username  LIKE '%$nama_dicari%' OR
+    $tampil = "SELECT *FROM user WHERE username  LIKE '%$nama_dicari%' OR
                                           email     LIKE '%$nama_dicari%' OR
                                           id_user   LIKE  '%$nama_dicari%'";
 }

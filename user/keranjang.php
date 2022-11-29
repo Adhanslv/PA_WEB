@@ -26,7 +26,7 @@ if(empty($_SESSION['keranjang']) OR !isset($_SESSION['keranjang'])){
         <tr>
             <th>Gambar Produk</th>
             <th>Harga</th>
-            <th>Desk</th>
+            <th>Deskripsi</th>
             <th>Kategori</th>
             <th>Jumlah</th>
             <th>Total Harga</th>
@@ -36,7 +36,7 @@ if(empty($_SESSION['keranjang']) OR !isset($_SESSION['keranjang'])){
             <!-- Menampilkan Data Produk -->
             <?php
             require '..\koneksi.php';
-            $tampil = $db->query("SELECT * FROM tb_produk
+            $tampil = $db->query("SELECT * FROM produk
                                 WHERE id_produk ='$id_produk'");
             $data =   $tampil->fetch_assoc();
             $total = $data['harga'] * $jumlah;
@@ -44,7 +44,7 @@ if(empty($_SESSION['keranjang']) OR !isset($_SESSION['keranjang'])){
             <tr>
                 <td><img src="../img/<?=$data['gambar']?>" alt="" width="160px"></td>
                 <td>Rp.<?php echo number_format ($data ['harga'])?></td>
-                <td><?php echo $data ['desk']?></td>
+                <td><?php echo $data ['deskripsi']?></td>
                 <td><?php echo $data ['kategori']?></td>
                 <td><?php echo $jumlah?></td>
                 <td>Rp.<?php echo number_format ($total)?></td>
@@ -60,7 +60,7 @@ if(empty($_SESSION['keranjang']) OR !isset($_SESSION['keranjang'])){
     <a href="cekout.php" onclick="return confirm('Yakin?')"><button class="cekout"><i class="fa-solid fa-basket-shopping"></i> CheckOut</button></a>
 
 
-    <pre><?php print_r($_SESSION['pelanggan'])?></pre>
+    <!-- <pre><?php print_r($_SESSION['pelanggan'])?></pre> -->
     
 </body>
 </html>

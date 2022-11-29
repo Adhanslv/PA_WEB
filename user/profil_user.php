@@ -1,17 +1,13 @@
 <?php 
-
 require '..\koneksi.php'; 
 session_start();
 
 if (!isset($_SESSION['username'])) {
     header("Location: ..\login.php");}
 
-
-
-
 $US = $_SESSION['id_user'];
 
-$select_sql = "SELECT * FROM tb_user WHERE id_user = $US";
+$select_sql = "SELECT * FROM user WHERE id_user = $US";
 $tampil = @$db->query($select_sql);
 $result = mysqli_query($db, $select_sql);
 
@@ -24,7 +20,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     $username        = $KTP["username"];
     $email           = $KTP["email"];
     $tanggal         = $KTP["tgl"];
-
 
 ?>
 <!DOCTYPE html>
@@ -73,7 +68,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 <a href="bukun.php"  onclick="return confirm('yakin?')"><button class="ubah"><i class="fa-solid fa-file-pen"></i> Ubah Data</button></a>
 <a href="histori.php"><button class="histori"><i class="fa-solid fa-notes-medical"></i> Histori Beli</button></a>
 
-<!-- Tampilan CSS -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -112,7 +106,6 @@ td {
 text-align: left;
 padding: 8px;
 border-bottom:1px solid #cad1db;
-
 }
 
 th {
