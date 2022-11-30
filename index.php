@@ -63,7 +63,6 @@
     <li><a href="login.php">Keranjang</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#home">Home</a></li>
-    <!-- <img src="https://serbasepeda.com/assets/frontend/images/logo-serbasepeda.svg" alt="SerbaSepeda Logo" class="image"> -->
     <img src="img/logoo.png" alt="kueLogo" class="logo" width ="150px"> 
     </ul> 
   </nav>
@@ -195,7 +194,7 @@ body{
 
 .logo{
     margin-top: 15px;
-    margin-left:5px;
+    margin-left:6px;
 }
 nav{
   height:200px;
