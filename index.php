@@ -19,7 +19,7 @@
                                             id_produk   LIKE  '%$nama_dicari%'";
 }
 
-if( isset($_POST["cari"])){
+if( isset($_POST["car"])){
   $nama_dicari = $_POST["keyword"];
   $select_sql = "SELECT tb_pembelian.id_pembelian ,tb_pembelian.tanggal, 
                 tb_produk.gambar, tb_user.username,tb_pembelian.jumlah, tb_pembelian.harga,
